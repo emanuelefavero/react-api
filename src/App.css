@@ -1,0 +1,24 @@
+.app {
+  min-height: 100svh;
+
+  .header {
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+    padding-block: 1.25rem;
+  }
+
+  .main {
+    padding-block: 2rem;
+
+    .container {
+      display: grid;
+      gap: 2rem;
+      min-height: calc(100svh - 14rem);
+    }
+  }
+
+  .footer {
+    padding-block: 1.25rem;
+    color: var(--foreground-muted);
+  }
+}
