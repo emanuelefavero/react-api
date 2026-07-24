@@ -1,82 +1,10 @@
 // @ts-check
-
+/** @import { ActorsState } from './types' */
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import { fetchActors } from './api';
 
-/** @typedef {'male' | 'female'} Gender */
-
-/**
- * @typedef {Object} ApiActor
- * @property {number} id
- * @property {string} name
- * @property {number} birth_year
- * @property {number} [death_year]
- * @property {string} nationality
- * @property {string[]} known_for
- * @property {string[]} awards
- * @property {string} biography
- * @property {string} image
- */
-
-/**
- * @typedef {ApiActor & {
- *   uid: string,
- *   gender: Gender
- * }} Actor
- */
-
-/**
- * @typedef {
- *   | { step: 'idle' }
- *   | { step: 'loading' }
- *   | { step: 'success', data: Actor[] }
- *   | { step: 'error', error: Error }
- * } State
- */
-
-/** @type {State} */
+/** @type {ActorsState} */
 const INITIAL_STATE = Object.freeze({ step: 'idle' });
-
-const ACTORS_URL = 'https://lanciweb.github.io/demo/api/actors/';
-const ACTRESSES_URL = 'https://lanciweb.github.io/demo/api/actresses/';
-
-/**
- * @param {Object[]} data
- * @param {Gender} gender
- * @returns {Actor[]}
- */
-const normalizeActorsData = (data, gender) => {
-  return data.map((item) => ({
-    ...item,
-    uid: `${gender}-${item.id}`,
-    gender,
-  }));
-};
-
-/**
- * @param {string} url
- * @param {Object} [params]
- * @returns {Promise<any>}
- */
-const fetchData = async (url, params = {}) => {
-  const { data } = await axios.get(url, { params });
-  return data;
-};
-
-/**
- * @returns {Promise<Actor[]>}
- */
-const fetchActors = async () => {
-  const [actors, actresses] = await Promise.all([
-    fetchData(ACTORS_URL),
-    fetchData(ACTRESSES_URL),
-  ]);
-
-  return [
-    ...normalizeActorsData(actors, 'male'),
-    ...normalizeActorsData(actresses, 'female'),
-  ].sort((a, b) => a.name.localeCompare(b.name));
-};
 
 export const Actors = () => {
   const [state, setState] = useState(INITIAL_STATE);
@@ -87,7 +15,6 @@ export const Actors = () => {
     try {
       const data = await fetchActors();
 
-      console.log('success', data);
       setState({
         step: 'success',
         data,
@@ -98,7 +25,7 @@ export const Actors = () => {
         error,
       });
     }
-  }, []); // memoized to avoid infinite loop as it's added to useEffect deps
+  }, []);
 
   useEffect(() => {
     loadActors();
