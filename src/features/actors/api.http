@@ -1,0 +1,8 @@
+@actorsURL = https://lanciweb.github.io/demo/api/actresses/
+@actressesURL = https://lanciweb.github.io/demo/api/actresses/
+
+### 
+GET {{actorsURL}}
+
+###
+GET {{actressesURL}}
