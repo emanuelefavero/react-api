@@ -1,3 +1,5 @@
+// @ts-check
+
 import './App.css';
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
@@ -5,11 +7,7 @@ import axios from 'axios';
 /** @typedef {'male' | 'female'} Gender */
 
 /**
- * Actor normalized from the API response.
- *
- * @typedef {Object} Actor
- * @property {string} uid
- * @property {Gender} gender
+ * @typedef {Object} ApiActor
  * @property {number} id
  * @property {string} name
  * @property {number} birth_year
@@ -19,6 +17,13 @@ import axios from 'axios';
  * @property {string[]} awards
  * @property {string} biography
  * @property {string} image
+ */
+
+/**
+ * @typedef {ApiActor & {
+ *   uid: string,
+ *   gender: Gender
+ * }} Actor
  */
 
 /**
