@@ -2,7 +2,7 @@ import './Select.css';
 import { ChevronDown } from 'lucide-react';
 import { cx } from '@/lib/utils';
 
-export const Select = ({ className, children, ...props }) => (
+export const Select = ({ className = '', children, ...props }) => (
   <div className='select-wrapper'>
     <select className={cx('select', className)} {...props}>
       {children}

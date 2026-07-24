@@ -10,7 +10,7 @@ const buttonVariant = Object.freeze({
 export const Button = ({
   type = 'button',
   variant = buttonVariant.primary,
-  className,
+  className = '',
   ...props
 }) => (
   <button type={type} className={cx('button', variant, className)} {...props} />

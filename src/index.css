@@ -4,6 +4,7 @@
   --foreground-muted: #717578;
   --background: #fff;
   --background-secondary: #f6f8fc;
+  --background-warning: #fff4e5;
   --primary: #5b69ff;
   --primary-foreground: #fff;
   --warning: #ffc109;
@@ -17,6 +18,7 @@
     --foreground-muted: #9296a0;
     --background: #0d1016;
     --background-secondary: #07080d;
+    --background-warning: #3b2e00;
     --warning: #bf9002;
     --danger: #f3474d;
     --border: #2f333d;
@@ -106,7 +108,7 @@ body {
   color: var(--foreground);
   background: var(--background-secondary);
   min-height: 100svh;
-  min-width: 320px;
+  min-width: 350px;
   font-family: var(--sans);
   line-height: 1.5;
   letter-spacing: 0;

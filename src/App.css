@@ -1,22 +1,22 @@
 .app {
   min-height: 100svh;
 
-  .header {
+  > .header {
     background-color: var(--background);
     border-bottom: 1px solid var(--border);
     padding-block: 1.25rem;
   }
 
-  .main {
+  > .main {
     padding-block: 2rem;
 
-    .container {
+    > .container {
       display: grid;
       gap: 2rem;
     }
   }
 
-  .footer {
+  > .footer {
     padding-block: 1.25rem;
     color: var(--foreground-muted);
   }

@@ -2,6 +2,7 @@
 /** @import { ActorsState } from './types' */
 import { useState, useEffect, useCallback } from 'react';
 import { fetchActors } from './api';
+import { ActorList } from './components/ActorList';
 
 /** @type {ActorsState} */
 const INITIAL_STATE = Object.freeze({ step: 'idle' });
@@ -31,22 +32,33 @@ export const Actors = () => {
     loadActors();
   }, [loadActors]);
 
+  const handleReload = () => loadActors();
+
+  const getContent = () => {
+    switch (state.step) {
+      case 'idle':
+        return null;
+      case 'loading':
+        return <p role='status'>Loading...</p>;
+      case 'error':
+        return (
+          <div role='alert'>
+            <p>Error: {state.error.message}</p>
+            <button onClick={handleReload}>Retry</button>
+          </div>
+        );
+      case 'success':
+        return <ActorList actors={state.data} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className='actors'>
-      {(() => {
-        switch (state.step) {
-          case 'idle':
-            return 'Idle...';
-          case 'loading':
-            return 'Loading...';
-          case 'success':
-            return `Success: ${state.data.length} items loaded`;
-          case 'error':
-            return `Error: ${state.error.message}`;
-          default:
-            return '';
-        }
-      })()}
-    </div>
+    <section className='actors' aria-labelledby='actors-title'>
+      <h2 id='actors-title'>All Actors</h2>
+
+      {getContent()}
+    </section>
   );
 };
