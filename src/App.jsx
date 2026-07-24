@@ -1,6 +1,69 @@
 import './App.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+/**
+ * @typedef {Object} Data
+ * @property {number} id
+ * @property {string} name
+ * @property {number} birth_year
+ * @property {string} nationality
+ * @property {string[]} known_for
+ * @property {string[]} awards
+ * @property {string} biography
+ * @property {string} image
+ */
+
+/** @type {{
+ *  step: 'idle' | 'loading' | 'success' | 'error',
+ *  data?: Data[],
+ *  error?: Error
+ * }}
+ */
+const INITIAL_STATE = { step: 'idle' };
+
+const ACTORS_URL = 'https://lanciweb.github.io/demo/api/actors/';
+const ACTRESSES_URL = 'https://lanciweb.github.io/demo/api/actresses/';
 
 export function App() {
+  const [actors, setActors] = useState(INITIAL_STATE);
+  const [actresses, setActresses] = useState(INITIAL_STATE);
+
+  const fetchActors = () => {
+    setActors({ step: 'loading' });
+
+    axios
+      .get(ACTORS_URL)
+      .then((response) => {
+        const updatedActors = {
+          step: 'success',
+          data: response.data,
+        };
+        setActors(updatedActors);
+        console.log(updatedActors);
+      })
+      .catch((error) => setActors({ step: 'error', error }));
+  };
+
+  const fetchActresses = () => {
+    axios
+      .get(ACTRESSES_URL)
+      .then((response) => {
+        const updatedActresses = {
+          step: 'success',
+          data: response.data,
+        };
+        setActresses(updatedActresses);
+        console.log(updatedActresses);
+      })
+      .catch((error) => setActresses({ step: 'error', error }));
+  };
+
+  useEffect(() => {
+    fetchActors();
+    fetchActresses();
+  }, []);
+
   return (
     <div className='app'>
       <header className='header'>
@@ -11,7 +74,13 @@ export function App() {
 
       <main className='main'>
         <div className='container'>
-          <p>Hello</p>
+          <code style={{ color: 'var(--warning)' }}>
+            {JSON.stringify(actors.data, null, 2)}
+          </code>
+
+          <code style={{ color: 'var(--danger)' }}>
+            {JSON.stringify(actresses.data, null, 2)}
+          </code>
         </div>
       </main>
 
