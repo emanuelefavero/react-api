@@ -2,6 +2,7 @@
 /** @import { Actor } from './types' */
 import { fetchData } from '@/lib/api';
 import { normalizeActorsData } from './utils';
+import { validateActorsData } from './validation';
 
 const ACTORS_URL = 'https://lanciweb.github.io/demo/api/actors/';
 const ACTRESSES_URL = 'https://lanciweb.github.io/demo/api/actresses/';
@@ -12,10 +13,13 @@ const ACTRESSES_URL = 'https://lanciweb.github.io/demo/api/actresses/';
  * @returns {Promise<Actor[]>}
  */
 export const fetchActors = async () => {
-  const [actors, actresses] = await Promise.all([
+  const [actorsData, actressesData] = await Promise.all([
     fetchData(ACTORS_URL),
     fetchData(ACTRESSES_URL),
   ]);
+
+  const actors = validateActorsData(actorsData);
+  const actresses = validateActorsData(actressesData);
 
   return [
     ...normalizeActorsData(actors, 'male'),

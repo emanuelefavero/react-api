@@ -21,6 +21,7 @@ The main solution is organized inside [`src/features/actors`](./src/features/act
 - [`Actors.jsx`](./src/features/actors/Actors.jsx) manages loading, success, and error states;
 - [`api.js`](./src/features/actors/api.js) fetches both API lists, while [`api.http`](./src/features/actors/api.http) contains requests for testing the endpoints;
 - [`utils.js`](./src/features/actors/utils.js) normalizes the results and [`types.js`](./src/features/actors/types.js) documents the API data and state shapes;
+- [`validation.js`](./src/features/actors/validation.js) validates the API data and throws an error if the data is invalid;
 - [`components`](./src/features/actors/components) contains `ActorList` and `ActorCard`, together with their responsive styles;
 - [`index.js`](./src/features/actors/index.js) exports the feature for use in the application.
 
