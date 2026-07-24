@@ -36,7 +36,7 @@ import axios from 'axios';
  */
 
 /** @type {State} */
-const INITIAL_STATE = { step: 'idle' };
+const INITIAL_STATE = Object.freeze({ step: 'idle' });
 
 const ACTORS_URL = 'https://lanciweb.github.io/demo/api/actors/';
 const ACTRESSES_URL = 'https://lanciweb.github.io/demo/api/actresses/';
@@ -54,11 +54,19 @@ const normalizeActorsData = (data, gender) => {
   }));
 };
 
+/**
+ * @param {string} url
+ * @param {Object} [params]
+ * @returns {Promise<any>}
+ */
 const fetchData = async (url, params = {}) => {
   const { data } = await axios.get(url, { params });
   return data;
 };
 
+/**
+ * @returns {Promise<Actor[]>}
+ */
 const fetchActors = async () => {
   const [actors, actresses] = await Promise.all([
     fetchData(ACTORS_URL),
@@ -91,7 +99,7 @@ export function App() {
         error,
       });
     }
-  }, []); // memoized cause it's inside the component and used in useEffect
+  }, []); // memoized to avoid infinite loop as it's added to useEffect deps
 
   useEffect(() => {
     loadActors();
