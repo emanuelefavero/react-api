@@ -1,6 +1,8 @@
 // @ts-check
 /** @import { ActorsState } from './types' */
 import { useState, useEffect, useCallback } from 'react';
+import { Spinner } from '@/components/ui/Spinner';
+import { delay } from '@/lib/utils';
 import { fetchActors } from './api';
 import { ActorList } from './components/ActorList';
 
@@ -17,7 +19,7 @@ export const Actors = () => {
     setState({ step: 'loading' });
 
     try {
-      const data = await fetchActors();
+      const [data] = await Promise.all([fetchActors(), delay()]);
 
       setState({
         step: 'success',
@@ -42,7 +44,7 @@ export const Actors = () => {
       case 'idle':
         return null;
       case 'loading':
-        return <p role='status'>Loading...</p>;
+        return <Spinner />;
       case 'error':
         return (
           <div role='alert'>
