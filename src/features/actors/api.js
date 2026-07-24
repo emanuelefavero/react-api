@@ -7,6 +7,8 @@ const ACTORS_URL = 'https://lanciweb.github.io/demo/api/actors/';
 const ACTRESSES_URL = 'https://lanciweb.github.io/demo/api/actresses/';
 
 /**
+ * Fetches actors and actresses data from the API and returns a combined and normalized list of actors with unique identifiers and gender information.
+ *
  * @returns {Promise<Actor[]>}
  */
 export const fetchActors = async () => {

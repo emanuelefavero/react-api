@@ -12,7 +12,7 @@ export function App() {
 
       <main className='main'>
         <div className='container'>
-          <Actors />
+          <Actors /> {/* <- solution */}
         </div>
       </main>
 

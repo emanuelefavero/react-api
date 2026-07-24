@@ -7,6 +7,9 @@ import { ActorList } from './components/ActorList';
 /** @type {ActorsState} */
 const INITIAL_STATE = Object.freeze({ step: 'idle' });
 
+/**
+ * Main Orchestrator for the Actors feature. It handles the fetching of actors data from the API, manages the loading and error states, and renders the ActorList component with the fetched data.
+ */
 export const Actors = () => {
   const [state, setState] = useState(INITIAL_STATE);
 
