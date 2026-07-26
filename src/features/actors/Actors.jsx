@@ -1,6 +1,7 @@
 // @ts-check
 /** @import { ActorsState } from './types' */
 import { useState, useEffect, useCallback } from 'react';
+import { IncrementalList } from '@/components/shared/IncrementalList';
 import { Spinner } from '@/components/ui/Spinner';
 import { delay } from '@/lib/utils';
 import { fetchActors } from './api';
@@ -53,7 +54,12 @@ export const Actors = () => {
           </div>
         );
       case 'success':
-        return <ActorList actors={state.data} />;
+        return (
+          <IncrementalList
+            items={state.data}
+            renderList={(visibleActors) => <ActorList actors={visibleActors} />}
+          />
+        );
       default:
         return null;
     }
