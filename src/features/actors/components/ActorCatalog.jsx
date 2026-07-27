@@ -2,10 +2,15 @@ import { useState } from 'react';
 import { IncrementalList } from '@/components/shared/IncrementalList';
 import { ActorFilters } from './ActorFilters';
 import { ActorList } from './ActorList';
-import { filterActors, sortActors } from '@/features/actors/utils';
+import {
+  filterActors,
+  getNationalities,
+  sortActors,
+} from '@/features/actors/utils';
 
 const INITIAL_FILTERS = Object.freeze({
   gender: 'all',
+  nationality: 'all',
 });
 
 export const ActorCatalog = ({ actors }) => {
@@ -14,6 +19,7 @@ export const ActorCatalog = ({ actors }) => {
   const filteredActors = filterActors(actors, filters);
   const sortedActors = sortActors(filteredActors);
   const queryKey = Object.values(filters).join('-');
+  const nationalities = getNationalities(actors);
 
   const handleFilterChange = (event) => {
     const { type, name, value: inputValue, checked } = event.target;
@@ -26,18 +32,23 @@ export const ActorCatalog = ({ actors }) => {
     }));
   };
 
-  if (sortedActors.length === 0)
-    return <p role='alert'>No actors found matching the selected filters.</p>;
-
   return (
     <>
-      <ActorFilters filters={filters} onFilterChange={handleFilterChange} />
-
-      <IncrementalList
-        key={queryKey} // <- Reset incremental list state when filters change
-        items={sortedActors}
-        renderList={(visibleActors) => <ActorList actors={visibleActors} />}
+      <ActorFilters
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        nationalities={nationalities}
       />
+
+      {sortedActors.length > 0 ? (
+        <IncrementalList
+          key={queryKey} // <- Reset incremental list state when filters change
+          items={sortedActors}
+          renderList={(visibleActors) => <ActorList actors={visibleActors} />}
+        />
+      ) : (
+        <p role='status'>No actors found matching the selected filters.</p>
+      )}
     </>
   );
 };

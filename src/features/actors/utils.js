@@ -28,6 +28,12 @@ export const filterActors = (actors, filters) =>
       return false;
     }
 
+    if (
+      filters.nationality !== 'all' &&
+      actor.nationality !== filters.nationality
+    )
+      return false;
+
     return true;
   });
 
@@ -38,6 +44,19 @@ export const filterActors = (actors, filters) =>
  * @returns {Actor[]}
  */
 export const sortActors = (actors) =>
-  [...actors].sort((firstActor, secondActor) =>
-    firstActor.name.localeCompare(secondActor.name),
+  [...actors].sort((a, b) => a.name.localeCompare(b.name));
+
+// const nationalities = [
+//     ...new Set(actors.map((actor) => actor.nationality)),
+//   ].sort((a, b) => a.localeCompare(b));
+
+/**
+ * Extracts and returns a sorted list of unique nationalities from actors
+ *
+ * @param {Actor[]} actors
+ * @returns {string[]}
+ */
+export const getNationalities = (actors) =>
+  [...new Set(actors.map((actor) => actor.nationality))].sort((a, b) =>
+    a.localeCompare(b),
   );

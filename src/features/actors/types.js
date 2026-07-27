@@ -33,6 +33,7 @@
 /**
  * @typedef {Object} ActorsFilter
  * @property {Gender | 'all'} gender
+ * @property {string} nationality
  */
 
 export {};

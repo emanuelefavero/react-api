@@ -8,14 +8,14 @@ const GENDER_OPTIONS = [
   { value: 'female', label: 'Female' },
 ];
 
-export const ActorFilters = ({ filters, onFilterChange }) => {
+export const ActorFilters = ({ filters, onFilterChange, nationalities }) => {
   return (
     <Card className='actor-filter'>
       <Card.Header>
         <Card.Title as='h3'>Filter Actors</Card.Title>
       </Card.Header>
       <Card.Content>
-        <form>
+        <form className='form'>
           <div className='form-group'>
             <label htmlFor='gender-select' className='font-medium text-base'>
               Gender
@@ -29,6 +29,29 @@ export const ActorFilters = ({ filters, onFilterChange }) => {
               {GENDER_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
+                </option>
+              ))}
+            </Select>
+          </div>
+
+          <div className='form-group'>
+            <label
+              htmlFor='nationality-select'
+              className='font-medium text-base'
+            >
+              Nationality
+            </label>
+            <Select
+              name='nationality'
+              id='nationality-select'
+              value={filters.nationality}
+              onChange={onFilterChange}
+            >
+              <option value='all'>All</option>
+
+              {nationalities.map((option) => (
+                <option key={option} value={option}>
+                  {option}
                 </option>
               ))}
             </Select>
