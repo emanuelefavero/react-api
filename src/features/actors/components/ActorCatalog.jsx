@@ -4,6 +4,7 @@ import { ActorFilters } from './ActorFilters';
 import { ActorList } from './ActorList';
 import {
   filterActors,
+  getAppliedFilters,
   getNationalities,
   sortActors,
   getBirthDecades,
@@ -24,12 +25,7 @@ export const ActorCatalog = ({ actors }) => {
   const queryKey = Object.values(filters).join('-');
   const nationalities = getNationalities(actors);
   const birthDecades = getBirthDecades(actors);
-  const appliedFilters = Object.fromEntries(
-    Object.entries(filters).map(([name, value]) => [
-      name,
-      value !== INITIAL_FILTERS[name],
-    ]),
-  );
+  const appliedFilters = getAppliedFilters(filters, INITIAL_FILTERS);
   const hasFiltersApplied = Object.values(appliedFilters).some(Boolean);
 
   const handleFilterChange = (event) => {

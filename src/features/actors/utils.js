@@ -53,6 +53,23 @@ export const filterActors = (actors, filters) =>
   });
 
 /**
+ * Compares each filter with its initial value and returns a boolean map
+ * indicating which filters are currently applied.
+ *
+ * @param {ActorsFilter} filters
+ * @param {ActorsFilter} initialFilters
+ * @returns {Record<string, boolean>}
+ */
+export const getAppliedFilters = (filters, initialFilters) => {
+  return Object.fromEntries(
+    Object.entries(filters).map(([name, value]) => [
+      name,
+      value !== initialFilters[name],
+    ]),
+  );
+};
+
+/**
  * Sorts the actors alphabetically by their names.
  *
  * @param {Actor[]} actors
@@ -60,10 +77,6 @@ export const filterActors = (actors, filters) =>
  */
 export const sortActors = (actors) =>
   [...actors].sort((a, b) => a.name.localeCompare(b.name));
-
-// const nationalities = [
-//     ...new Set(actors.map((actor) => actor.nationality)),
-//   ].sort((a, b) => a.localeCompare(b));
 
 /**
  * Extracts and returns a sorted list of unique nationalities from actors
