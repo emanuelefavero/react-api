@@ -24,15 +24,30 @@ export const normalizeActorsData = (data, gender) =>
  */
 export const filterActors = (actors, filters) =>
   actors.filter((actor) => {
+    // Gender
     if (filters.gender !== 'all' && actor.gender !== filters.gender) {
       return false;
     }
 
+    // Nationality
     if (
       filters.nationality !== 'all' &&
       actor.nationality !== filters.nationality
     )
       return false;
+
+    // Birth Decade
+    const actorBirthDecade = Math.floor(actor.birth_year / 10) * 10;
+    if (
+      filters.birthDecade !== 'all' &&
+      actorBirthDecade !== Number(filters.birthDecade)
+    )
+      return false;
+
+    // Life Status
+    const isDeceased = actor.death_year !== undefined;
+    if (filters.lifeStatus === 'living' && isDeceased) return false;
+    if (filters.lifeStatus === 'deceased' && !isDeceased) return false;
 
     return true;
   });
@@ -60,3 +75,18 @@ export const getNationalities = (actors) =>
   [...new Set(actors.map((actor) => actor.nationality))].sort((a, b) =>
     a.localeCompare(b),
   );
+
+/**
+ * Extracts and returns a sorted list of unique birth decades from actors
+ *
+ * @param {Actor[]} actors
+ * @returns {number[]}
+ */
+export const getBirthDecades = (actors) =>
+  [
+    ...new Set(
+      actors
+        .map((actor) => Math.floor(actor.birth_year / 10) * 10)
+        .filter((decade) => !isNaN(decade)),
+    ),
+  ].sort((a, b) => a - b);

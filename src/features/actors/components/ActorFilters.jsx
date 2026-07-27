@@ -8,14 +8,27 @@ const GENDER_OPTIONS = [
   { value: 'female', label: 'Female' },
 ];
 
-export const ActorFilters = ({ filters, onFilterChange, nationalities }) => {
+const LIFE_STATUS_OPTIONS = [
+  { value: 'all', label: 'All' },
+  { value: 'living', label: 'Living' },
+  { value: 'deceased', label: 'Deceased' },
+];
+
+export const ActorFilters = ({
+  filters,
+  onFilterChange,
+  nationalities,
+  birthDecades,
+}) => {
   return (
     <Card className='actor-filter'>
       <Card.Header>
         <Card.Title as='h3'>Filter Actors</Card.Title>
       </Card.Header>
+
       <Card.Content>
         <form className='form'>
+          {/* GENDER */}
           <div className='form-group'>
             <label htmlFor='gender-select' className='font-medium text-base'>
               Gender
@@ -34,6 +47,7 @@ export const ActorFilters = ({ filters, onFilterChange, nationalities }) => {
             </Select>
           </div>
 
+          {/* NATIONALITY */}
           <div className='form-group'>
             <label
               htmlFor='nationality-select'
@@ -52,6 +66,48 @@ export const ActorFilters = ({ filters, onFilterChange, nationalities }) => {
               {nationalities.map((option) => (
                 <option key={option} value={option}>
                   {option}
+                </option>
+              ))}
+            </Select>
+          </div>
+
+          {/* BIRTH DECADE */}
+          <div className='form-group'>
+            <label htmlFor='decade-select' className='font-medium text-base'>
+              Birth decade
+            </label>
+
+            <Select
+              name='birthDecade'
+              id='decade-select'
+              value={filters.birthDecade}
+              onChange={onFilterChange}
+            >
+              <option value='all'>All</option>
+
+              {birthDecades.map((decade) => (
+                <option key={decade} value={decade}>
+                  {decade}s
+                </option>
+              ))}
+            </Select>
+          </div>
+
+          {/* LIFE STATUS */}
+          <div className='form-group'>
+            <label htmlFor='status-select' className='font-medium text-base'>
+              Life status
+            </label>
+
+            <Select
+              name='lifeStatus'
+              id='status-select'
+              value={filters.lifeStatus}
+              onChange={onFilterChange}
+            >
+              {LIFE_STATUS_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
                 </option>
               ))}
             </Select>

@@ -31,9 +31,15 @@
  */
 
 /**
+ * @typedef {'all' | 'living' | 'deceased'} LifeStatus
+ */
+
+/**
  * @typedef {Object} ActorsFilter
  * @property {Gender | 'all'} gender
  * @property {string} nationality
+ * @property {string} birthDecade
+ * @property {LifeStatus} lifeStatus
  */
 
 export {};

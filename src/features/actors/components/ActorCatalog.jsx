@@ -6,11 +6,14 @@ import {
   filterActors,
   getNationalities,
   sortActors,
+  getBirthDecades,
 } from '@/features/actors/utils';
 
 const INITIAL_FILTERS = Object.freeze({
   gender: 'all',
   nationality: 'all',
+  birthDecade: 'all',
+  lifeStatus: 'all',
 });
 
 export const ActorCatalog = ({ actors }) => {
@@ -20,6 +23,7 @@ export const ActorCatalog = ({ actors }) => {
   const sortedActors = sortActors(filteredActors);
   const queryKey = Object.values(filters).join('-');
   const nationalities = getNationalities(actors);
+  const birthDecades = getBirthDecades(actors);
 
   const handleFilterChange = (event) => {
     const { type, name, value: inputValue, checked } = event.target;
@@ -38,6 +42,7 @@ export const ActorCatalog = ({ actors }) => {
         filters={filters}
         onFilterChange={handleFilterChange}
         nationalities={nationalities}
+        birthDecades={birthDecades}
       />
 
       {sortedActors.length > 0 ? (
