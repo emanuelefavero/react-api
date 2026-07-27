@@ -1,5 +1,6 @@
 .card {
-  --card-padding: 1.25rem;
+  --padding-block: 1.15rem;
+  --padding-inline: 1.1rem;
 
   overflow: hidden;
   background-color: var(--background);
@@ -11,15 +12,12 @@
 
   .card-header,
   .card-content {
-    padding: var(--card-padding);
+    padding-block: var(--padding-block);
+    padding-inline: var(--padding-inline);
   }
 
   .card-header {
     background-color: var(--background-muted);
     border-bottom: 1px solid var(--border);
-  }
-
-  .card-header + .card-content {
-    padding-top: 0;
   }
 }

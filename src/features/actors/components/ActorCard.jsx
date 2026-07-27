@@ -22,7 +22,7 @@ export const ActorCard = ({ actor }) => {
             {actor.name}
           </Card.Title>
 
-          <dl className='details text-sm'>
+          <dl className='details text-base'>
             <div className='detail'>
               <dt className='sr-only'>Born</dt>
               <dd>{actor.birth_year}</dd>
