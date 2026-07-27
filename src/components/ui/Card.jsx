@@ -10,7 +10,10 @@ const CardHeader = ({ as: Component = 'div', className = '', ...props }) => (
 );
 
 const CardTitle = ({ as: Component = 'div', className = '', ...props }) => (
-  <Component className={cx('card-title', className)} {...props} />
+  <Component
+    className={cx('card-title text-xl font-semibold', className)}
+    {...props}
+  />
 );
 
 const CardContent = ({ as: Component = 'div', className = '', ...props }) => (

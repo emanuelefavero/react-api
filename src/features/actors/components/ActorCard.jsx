@@ -18,7 +18,7 @@ export const ActorCard = ({ actor }) => {
         />
 
         <div className='info'>
-          <Card.Title as='h3' className='name text-xl font-semibold'>
+          <Card.Title as='h3' className='name'>
             {actor.name}
           </Card.Title>
 

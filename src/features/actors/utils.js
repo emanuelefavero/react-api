@@ -15,3 +15,11 @@ export const normalizeActorsData = (data, gender) => {
     gender,
   }));
 };
+
+/**
+ * @param {string} string
+ * @returns {string}
+ */
+export const capitalize = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
