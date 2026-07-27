@@ -30,4 +30,9 @@
  * } ActorsState
  */
 
+/**
+ * @typedef {Object} ActorsFilter
+ * @property {Gender | 'all'} gender
+ */
+
 export {};

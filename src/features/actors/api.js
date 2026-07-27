@@ -21,10 +21,8 @@ export const fetchActors = async () => {
   const actors = validateActorsData(actorsData);
   const actresses = validateActorsData(actressesData);
 
-  const allActors = [
+  return [
     ...normalizeActorsData(actors, 'male'),
     ...normalizeActorsData(actresses, 'female'),
-  ].sort((a, b) => a.name.localeCompare(b.name));
-
-  return allActors;
+  ];
 };

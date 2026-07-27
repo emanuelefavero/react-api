@@ -1,23 +1,21 @@
 import { Select } from '@/components/ui/Select';
 import { Card } from '@/components/ui/Card';
-import './ActorFilter.css';
+import './ActorFilters.css';
 
-const GENDER_SELECT_OPTIONS = [
+const GENDER_OPTIONS = [
   { value: 'all', label: 'All' },
   { value: 'male', label: 'Male' },
   { value: 'female', label: 'Female' },
 ];
 
-export const ActorFilter = ({ filter, onFilterChange }) => {
-  const handleSubmit = (e) => e.preventDefault();
-
+export const ActorFilters = ({ filters, onFilterChange }) => {
   return (
     <Card className='actor-filter'>
       <Card.Header>
         <Card.Title as='h3'>Filter Actors</Card.Title>
       </Card.Header>
       <Card.Content>
-        <form onSubmit={handleSubmit} className='form'>
+        <form>
           <div className='form-group'>
             <label htmlFor='gender-select' className='font-medium text-base'>
               Gender
@@ -25,10 +23,10 @@ export const ActorFilter = ({ filter, onFilterChange }) => {
             <Select
               name='gender'
               id='gender-select'
-              value={filter.gender}
+              value={filters.gender}
               onChange={onFilterChange}
             >
-              {GENDER_SELECT_OPTIONS.map((option) => (
+              {GENDER_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
