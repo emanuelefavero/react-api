@@ -19,16 +19,22 @@
   &:active {
     transform: translateY(1px) scale(0.98);
     filter: brightness(0.9);
+
+    &:disabled {
+      transform: none;
+      filter: none;
+    }
   }
 
   &:disabled {
     opacity: 0.5;
-    cursor: not-allowed;
+    cursor: default;
   }
 
   &.primary {
     background-color: var(--primary);
     color: var(--primary-foreground);
+    border: 1px solid transparent;
   }
 
   &.danger {
@@ -47,8 +53,25 @@
     }
   }
 
+  &.warning {
+    background-color: var(--background-warning);
+    color: var(--foreground);
+    border: 1px solid var(--warning);
+
+    &:hover {
+      background-color: var(--warning);
+      color: var(--background);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--warning);
+      outline-offset: 2px;
+    }
+  }
+
   &.ghost {
     background-color: transparent;
     color: var(--foreground);
+    border: 1px solid transparent;
   }
 }

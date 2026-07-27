@@ -4,6 +4,7 @@ import './Button.css';
 const buttonVariant = Object.freeze({
   primary: 'primary',
   danger: 'danger',
+  warning: 'warning',
   ghost: 'ghost',
 });
 

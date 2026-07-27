@@ -142,6 +142,56 @@ body {
   text-align: center;
 }
 
+/* Padding */
+.p-0 {
+  padding: 0;
+}
+
+.p-px {
+  padding: 1px;
+}
+
+.px-0 {
+  padding-inline: 0;
+}
+
+.px-px {
+  padding-inline: 1px;
+}
+
+.py-0 {
+  padding-block: 0;
+}
+
+.py-px {
+  padding-block: 1px;
+}
+
+/* Margin */
+.m-0 {
+  margin: 0;
+}
+
+.m-px {
+  margin: 1px;
+}
+
+.mx-0 {
+  margin-inline: 0;
+}
+
+.mx-px {
+  margin-inline: 1px;
+}
+
+.my-0 {
+  margin-block: 0;
+}
+
+.my-px {
+  margin-block: 1px;
+}
+
 /* Typography: Font Size, Line Height, Letter Spacing */
 .text-xs {
   font-size: 0.8rem;
