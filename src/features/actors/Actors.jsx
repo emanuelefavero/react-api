@@ -67,7 +67,9 @@ export const Actors = () => {
 
   return (
     <section className='actors' aria-labelledby='actors-title'>
-      <h2 id='actors-title'>All Actors</h2>
+      <h2 id='actors-title' className='font-normal text-3xl'>
+        All Actors
+      </h2>
 
       {getContent()}
     </section>
