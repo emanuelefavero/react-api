@@ -3,7 +3,8 @@
   --foreground: #0a2540;
   --foreground-muted: #717578;
   --background: #fff;
-  --background-secondary: #f6f8fc;
+  --background-muted: #f7f9fd;
+  --background-secondary: #eef2f5;
   --background-warning: #fff4e5;
   --primary: #3948ec;
   --primary-foreground: #fff;
@@ -17,6 +18,7 @@
     --foreground: #fff;
     --foreground-muted: #9296a0;
     --background: #0d1016;
+    --background-muted: #13161d;
     --background-secondary: #07080d;
     --background-warning: #3b2e00;
     --warning: #bf9002;

@@ -1,9 +1,25 @@
 .card {
+  --card-padding: 1.25rem;
+
+  overflow: hidden;
   background-color: var(--background);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  padding: 1.25rem;
   box-shadow:
     1px 1px 1px rgb(0 0 0 / 0.02),
     1px 1px 1px rgb(0 0 0 / 0.05);
+
+  .card-header,
+  .card-content {
+    padding: var(--card-padding);
+  }
+
+  .card-header {
+    background-color: var(--background-muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-header + .card-content {
+    padding-top: 0;
+  }
 }

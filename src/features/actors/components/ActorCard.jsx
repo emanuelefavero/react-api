@@ -7,7 +7,7 @@ export const ActorCard = ({ actor }) => {
 
   return (
     <Card as='article' className='actor-card'>
-      <div className='header'>
+      <Card.Header className='header'>
         <img
           className='portrait'
           src={actor.image}
@@ -18,7 +18,9 @@ export const ActorCard = ({ actor }) => {
         />
 
         <div className='info'>
-          <h3 className='name text-xl font-semibold'>{actor.name}</h3>
+          <Card.Title as='h3' className='name text-xl font-semibold'>
+            {actor.name}
+          </Card.Title>
 
           <dl className='details text-sm'>
             <div className='detail'>
@@ -31,27 +33,29 @@ export const ActorCard = ({ actor }) => {
             </div>
           </dl>
         </div>
-      </div>
+      </Card.Header>
 
-      <p className='biography text-base'>{actor.biography}</p>
+      <Card.Content className='content'>
+        <p className='biography text-base'>{actor.biography}</p>
 
-      <div className='movies'>
-        <h4 className='label text-sm font-semibold'>Known for</h4>
-        <p className='titles text-sm'>{actor.known_for.join(' · ')}</p>
-      </div>
-
-      {awards.length > 0 && (
-        <div className='awards'>
-          <h4 className='label text-sm font-semibold'>Awards</h4>
-          <ul className='list' aria-label={`${actor.name} awards`}>
-            {awards.map((award) => (
-              <li key={award} className='award'>
-                <Badge variant={Badge.variant.warning}>{award}</Badge>
-              </li>
-            ))}
-          </ul>
+        <div className='movies'>
+          <h4 className='label text-sm font-semibold'>Known for</h4>
+          <p className='titles text-sm'>{actor.known_for.join(' · ')}</p>
         </div>
-      )}
+
+        {awards.length > 0 && (
+          <div className='awards'>
+            <h4 className='label text-sm font-semibold'>Awards</h4>
+            <ul className='list' aria-label={`${actor.name} awards`}>
+              {awards.map((award) => (
+                <li key={award} className='award'>
+                  <Badge variant={Badge.variant.warning}>{award}</Badge>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </Card.Content>
     </Card>
   );
 };
