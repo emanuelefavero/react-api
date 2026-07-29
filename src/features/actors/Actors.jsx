@@ -16,22 +16,17 @@ const INITIAL_STATE = Object.freeze({ step: 'idle' });
 export const Actors = () => {
   const [state, setState] = useState(INITIAL_STATE);
 
-  const loadActors = useCallback(async () => {
+  const loadActors = useCallback(() => {
     setState({ step: 'loading' });
 
-    try {
-      const [data] = await Promise.all([fetchActors(), delay()]);
-
-      setState({
-        step: 'success',
-        data,
-      });
-    } catch (error) {
-      setState({
-        step: 'error',
-        error,
-      });
-    }
+    return Promise.all([fetchActors(), delay()])
+      .then(([data]) => setState({ step: 'success', data }))
+      .catch((error) =>
+        setState({
+          step: 'error',
+          error,
+        }),
+      );
   }, []);
 
   useEffect(() => {

@@ -12,17 +12,15 @@ const ACTRESSES_URL = 'https://lanciweb.github.io/demo/api/actresses/';
  *
  * @returns {Promise<Actor[]>}
  */
-export const fetchActors = async () => {
-  const [actorsData, actressesData] = await Promise.all([
-    fetchData(ACTORS_URL),
-    fetchData(ACTRESSES_URL),
-  ]);
+export const fetchActors = () =>
+  Promise.all([fetchData(ACTORS_URL), fetchData(ACTRESSES_URL)]).then(
+    ([actorsData, actressesData]) => {
+      const actors = validateActorsData(actorsData);
+      const actresses = validateActorsData(actressesData);
 
-  const actors = validateActorsData(actorsData);
-  const actresses = validateActorsData(actressesData);
-
-  return [
-    ...normalizeActorsData(actors, 'male'),
-    ...normalizeActorsData(actresses, 'female'),
-  ];
-};
+      return [
+        ...normalizeActorsData(actors, 'male'),
+        ...normalizeActorsData(actresses, 'female'),
+      ];
+    },
+  );
