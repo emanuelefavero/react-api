@@ -7,6 +7,5 @@ import axios from 'axios';
  * @example
  * fetchData(url, { page: 1 })
  */
-export const fetchData = (url, params = {}) => {
-  return axios.get(url, { params }).then(({ data }) => data);
-};
+export const fetchData = (url, params = {}) =>
+  axios.get(url, { params }).then(({ data }) => data);
